@@ -1,0 +1,873 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Audi Connect",
+  "description": {
+    "en": "Battery, charging, climate, locks and position of your Audi cars, from myAudi.",
+    "fr": "Batterie, charge, climatisation, verrous et position de vos Audi, via myAudi.",
+    "de": "Akku, Laden, Klimatisierung, Verriegelung und Position deiner Audi, über myAudi.",
+    "es": "Batería, carga, climatización, cierres y posición de sus Audi, desde myAudi."
+  },
+  "version": "0.0.0",
+  "docker_image": "ghcr.io/prohand/gladys-audiconnect:0.0.0",
+  "gladys_version": ">=5.1.0",
+  "cover_image": "https://raw.githubusercontent.com/prohand/gladys-audiconnect/main/cover.png",
+  "categories": ["energy", "climate", "security"],
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Getting started",
+        "fr": "Pour commencer",
+        "de": "Erste Schritte",
+        "es": "Primeros pasos"
+      },
+      "description": {
+        "en": "Pick your market, then click Connect: an Audi page opens, sign in with your myAudi account and approve the code. Your cars then appear in the Discovery tab. Audi no longer lets third-party apps sign in with a password, which is why no password is asked here.",
+        "fr": "Choisissez votre marché, puis cliquez sur Connecter : une page Audi s'ouvre, connectez-vous avec votre compte myAudi et validez le code. Vos voitures apparaissent ensuite dans l'onglet Découverte. Audi n'autorise plus les applications tierces à se connecter par mot de passe : c'est pourquoi aucun mot de passe n'est demandé ici.",
+        "de": "Wähle deinen Markt und klicke dann auf Verbinden: Eine Audi-Seite öffnet sich, melde dich mit deinem myAudi-Konto an und bestätige den Code. Deine Fahrzeuge erscheinen dann im Tab Erkennung. Audi lässt Drittanbieter-Apps nicht mehr per Passwort anmelden, deshalb wird hier kein Passwort abgefragt.",
+        "es": "Elija su mercado y pulse Conectar: se abre una página de Audi, inicie sesión con su cuenta myAudi y apruebe el código. Sus coches aparecen después en la pestaña Descubrimiento. Audi ya no permite que las aplicaciones de terceros inicien sesión con contraseña, por eso no se pide ninguna aquí."
+      },
+      "links": [
+        {
+          "url": "https://my.audi.com",
+          "label": {
+            "en": "myAudi",
+            "fr": "myAudi",
+            "de": "myAudi",
+            "es": "myAudi"
+          }
+        },
+        {
+          "url": "https://github.com/prohand/gladys-audiconnect/blob/main/docs/en.md",
+          "label": {
+            "en": "Integration documentation",
+            "fr": "Documentation de l'intégration",
+            "de": "Dokumentation der Integration",
+            "es": "Documentación de la integración"
+          }
+        }
+      ]
+    },
+    {
+      "key": "market",
+      "type": "select",
+      "label": {
+        "en": "Market",
+        "fr": "Marché",
+        "de": "Markt",
+        "es": "Mercado"
+      },
+      "description": {
+        "en": "Where your myAudi account was created. Europe covers every European country.",
+        "fr": "Où votre compte myAudi a été créé. Europe couvre tous les pays européens.",
+        "de": "Wo dein myAudi-Konto erstellt wurde. Europa umfasst alle europäischen Länder.",
+        "es": "Dónde se creó su cuenta myAudi. Europa abarca todos los países europeos."
+      },
+      "required": true,
+      "default": "DE",
+      "options": [
+        {
+          "value": "DE",
+          "label": {
+            "en": "Europe",
+            "fr": "Europe",
+            "de": "Europa",
+            "es": "Europa"
+          }
+        },
+        {
+          "value": "CA",
+          "label": {
+            "en": "Canada",
+            "fr": "Canada",
+            "de": "Kanada",
+            "es": "Canadá"
+          }
+        }
+      ]
+    },
+    {
+      "key": "account",
+      "type": "account_link",
+      "label": {
+        "en": "myAudi account",
+        "fr": "Compte myAudi",
+        "de": "myAudi-Konto",
+        "es": "Cuenta myAudi"
+      },
+      "description": {
+        "en": "Opens the Audi sign-in page. Approve the code shown there; the integration waits for it (10 minutes at most).",
+        "fr": "Ouvre la page de connexion Audi. Validez le code affiché ; l'intégration l'attend (10 minutes au plus).",
+        "de": "Öffnet die Audi-Anmeldeseite. Bestätige den dort angezeigten Code; die Integration wartet darauf (höchstens 10 Minuten).",
+        "es": "Abre la página de inicio de sesión de Audi. Apruebe el código mostrado; la integración lo espera (10 minutos como máximo)."
+      },
+      "required": false
+    },
+    {
+      "key": "spin",
+      "type": "secret",
+      "label": {
+        "en": "S-PIN",
+        "fr": "S-PIN",
+        "de": "S-PIN",
+        "es": "S-PIN"
+      },
+      "description": {
+        "en": "The 4-digit security PIN of your myAudi account. Only needed to lock and unlock the car from Gladys: leave it empty otherwise.",
+        "fr": "Le code de sécurité à 4 chiffres de votre compte myAudi. Seulement nécessaire pour verrouiller et déverrouiller la voiture depuis Gladys : laissez vide sinon.",
+        "de": "Die 4-stellige Sicherheits-PIN deines myAudi-Kontos. Nur nötig, um das Fahrzeug aus Gladys zu ver- und entriegeln: sonst leer lassen.",
+        "es": "El PIN de seguridad de 4 cifras de su cuenta myAudi. Solo hace falta para cerrar y abrir el coche desde Gladys: si no, déjelo vacío."
+      },
+      "placeholder": {
+        "en": "4 digits",
+        "fr": "4 chiffres",
+        "de": "4 Ziffern",
+        "es": "4 cifras"
+      },
+      "required": false
+    },
+    {
+      "key": "poll_frequency",
+      "type": "number",
+      "label": {
+        "en": "Refresh interval (s)",
+        "fr": "Intervalle de rafraîchissement (s)",
+        "de": "Aktualisierungsintervall (s)",
+        "es": "Intervalo de actualización (s)"
+      },
+      "description": {
+        "en": "How often each car is read from the Audi cloud, in seconds (5 minutes to 1 hour). Audi limits the calls per day: 15 minutes is a safe pace.",
+        "fr": "Fréquence de lecture de chaque voiture dans le cloud Audi, en secondes (de 5 minutes à 1 heure). Audi limite le nombre d'appels par jour : 15 minutes est un rythme sûr.",
+        "de": "Wie oft jedes Fahrzeug aus der Audi-Cloud gelesen wird, in Sekunden (5 Minuten bis 1 Stunde). Audi begrenzt die Aufrufe pro Tag: 15 Minuten sind ein sicherer Takt.",
+        "es": "Frecuencia de lectura de cada coche en la nube de Audi, en segundos (de 5 minutos a 1 hora). Audi limita las llamadas diarias: 15 minutos es un ritmo seguro."
+      },
+      "required": false,
+      "default": 900,
+      "min": 300,
+      "max": 3600
+    },
+    {
+      "key": "debug_logs",
+      "type": "boolean",
+      "label": {
+        "en": "Detailed logs (debug)",
+        "fr": "Journaux détaillés (debug)",
+        "de": "Detaillierte Protokolle (Debug)",
+        "es": "Registros detallados (depuración)"
+      },
+      "description": {
+        "en": "Log every call to the Audi cloud. Turn it on to understand a problem, then off again: it is verbose. Passwords, tokens and the S-PIN are never logged.",
+        "fr": "Journalise chaque appel au cloud Audi. Activez-le pour comprendre un problème, puis désactivez-le : c'est verbeux. Mots de passe, jetons et S-PIN ne sont jamais journalisés.",
+        "de": "Protokolliert jeden Aufruf der Audi-Cloud. Zum Verstehen eines Problems einschalten, danach wieder aus: Es ist ausführlich. Passwörter, Tokens und die S-PIN werden nie protokolliert.",
+        "es": "Registra cada llamada a la nube de Audi. Actívelo para entender un problema y desactívelo después: es muy prolijo. Contraseñas, tokens y el S-PIN nunca se registran."
+      },
+      "required": false,
+      "default": false
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "timeout_seconds": 60
+    },
+    {
+      "key": "refresh_now",
+      "label": {
+        "en": "Refresh a car now",
+        "fr": "Rafraîchir une voiture",
+        "de": "Fahrzeug jetzt aktualisieren",
+        "es": "Actualizar un coche ahora"
+      },
+      "timeout_seconds": 120,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": true
+        },
+        {
+          "key": "wake",
+          "type": "boolean",
+          "label": {
+            "en": "Wake the car up",
+            "fr": "Réveiller la voiture",
+            "de": "Fahrzeug aufwecken",
+            "es": "Despertar el coche"
+          },
+          "description": {
+            "en": "Ask the car itself for fresh values (up to 2 minutes). It uses the car's 12 V battery: not too often.",
+            "fr": "Demande des valeurs fraîches à la voiture elle-même (jusqu'à 2 minutes). Cela sollicite la batterie 12 V : pas trop souvent.",
+            "de": "Fragt frische Werte beim Fahrzeug selbst ab (bis zu 2 Minuten). Das belastet die 12-V-Batterie: nicht zu oft.",
+            "es": "Pide valores nuevos al propio coche (hasta 2 minutos). Usa la batería de 12 V del coche: no demasiado a menudo."
+          },
+          "required": false,
+          "default": false
+        }
+      ]
+    },
+    {
+      "key": "identify",
+      "label": {
+        "en": "Flash the lights",
+        "fr": "Faire clignoter les feux",
+        "de": "Lichter blinken lassen",
+        "es": "Hacer parpadear las luces"
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": true
+        }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "key": "car_status",
+      "label": {
+        "en": "Audi car",
+        "fr": "Voiture Audi",
+        "de": "Audi-Fahrzeug",
+        "es": "Coche Audi"
+      },
+      "description": {
+        "en": "Battery, range, mileage, locks, charging and climate of one car.",
+        "fr": "Batterie, autonomie, kilométrage, verrous, charge et clim d'une voiture.",
+        "de": "Akku, Reichweite, Kilometerstand, Verriegelung, Laden und Klima eines Autos.",
+        "es": "Batería, autonomía, kilometraje, cierres, carga y clima de un coche."
+      },
+      "icon": "truck",
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false
+        }
+      ],
+      "action_timeout_seconds": 60
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "charging_state_changed",
+      "label": {
+        "en": "Charging state changed",
+        "fr": "L'état de charge a changé",
+        "de": "Ladezustand geändert",
+        "es": "Ha cambiado el estado de carga"
+      },
+      "description": {
+        "en": "A car started charging, finished, stopped or reported a charging error.",
+        "fr": "Une voiture a commencé à charger, a terminé, s'est arrêtée ou signale une erreur de charge.",
+        "de": "Ein Fahrzeug hat zu laden begonnen, ist fertig, hat aufgehört oder meldet einen Ladefehler.",
+        "es": "Un coche ha empezado a cargar, ha terminado, se ha detenido o informa de un error de carga."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false
+        },
+        {
+          "key": "state",
+          "type": "multi_select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "charging",
+              "label": {
+                "en": "Charging",
+                "fr": "En charge",
+                "de": "Lädt",
+                "es": "Cargando"
+              }
+            },
+            {
+              "value": "finished",
+              "label": {
+                "en": "Finished (target reached)",
+                "fr": "Terminée (objectif atteint)",
+                "de": "Beendet (Ziel erreicht)",
+                "es": "Terminada (objetivo alcanzado)"
+              }
+            },
+            {
+              "value": "stopped",
+              "label": {
+                "en": "Not charging",
+                "fr": "Pas en charge",
+                "de": "Lädt nicht",
+                "es": "Sin cargar"
+              }
+            },
+            {
+              "value": "error",
+              "label": {
+                "en": "Error",
+                "fr": "Erreur",
+                "de": "Fehler",
+                "es": "Error"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Car name",
+            "fr": "Nom de la voiture",
+            "de": "Fahrzeugname",
+            "es": "Nombre del coche"
+          }
+        },
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Akkustand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "range",
+          "type": "number",
+          "label": {
+            "en": "Range (km)",
+            "fr": "Autonomie (km)",
+            "de": "Reichweite (km)",
+            "es": "Autonomía (km)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "lock_state_changed",
+      "label": {
+        "en": "Car locked or unlocked",
+        "fr": "Voiture verrouillée ou déverrouillée",
+        "de": "Fahrzeug ver- oder entriegelt",
+        "es": "Coche cerrado o abierto"
+      },
+      "description": {
+        "en": "The lock state reported by a car changed between two reads.",
+        "fr": "L'état de verrouillage d'une voiture a changé entre deux lectures.",
+        "de": "Der Verriegelungszustand eines Fahrzeugs hat sich zwischen zwei Abfragen geändert.",
+        "es": "El estado de cierre de un coche ha cambiado entre dos lecturas."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false
+        },
+        {
+          "key": "state",
+          "type": "multi_select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "locked",
+              "label": {
+                "en": "Locked",
+                "fr": "Verrouillée",
+                "de": "Verriegelt",
+                "es": "Cerrado"
+              }
+            },
+            {
+              "value": "unlocked",
+              "label": {
+                "en": "Unlocked",
+                "fr": "Déverrouillée",
+                "de": "Entriegelt",
+                "es": "Abierto"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Car name",
+            "fr": "Nom de la voiture",
+            "de": "Fahrzeugname",
+            "es": "Nombre del coche"
+          }
+        },
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          }
+        }
+      ]
+    },
+    {
+      "key": "command_failed",
+      "label": {
+        "en": "A car command failed",
+        "fr": "Une commande de voiture a échoué",
+        "de": "Ein Fahrzeugbefehl ist fehlgeschlagen",
+        "es": "Ha fallado una orden al coche"
+      },
+      "description": {
+        "en": "The car or the Audi cloud refused an order from Gladys (lock, charging, climate…).",
+        "fr": "La voiture ou le cloud Audi a refusé un ordre de Gladys (verrouillage, charge, climatisation…).",
+        "de": "Das Fahrzeug oder die Audi-Cloud hat einen Befehl von Gladys abgelehnt (Verriegeln, Laden, Klima…).",
+        "es": "El coche o la nube de Audi ha rechazado una orden de Gladys (cierre, carga, climatización…)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false
+        },
+        {
+          "key": "command",
+          "type": "multi_select",
+          "label": {
+            "en": "Command",
+            "fr": "Commande",
+            "de": "Befehl",
+            "es": "Orden"
+          },
+          "options": [
+            {
+              "value": "lock",
+              "label": {
+                "en": "Lock",
+                "fr": "Verrouiller",
+                "de": "Verriegeln",
+                "es": "Cerrar"
+              }
+            },
+            {
+              "value": "unlock",
+              "label": {
+                "en": "Unlock",
+                "fr": "Déverrouiller",
+                "de": "Entriegeln",
+                "es": "Abrir"
+              }
+            },
+            {
+              "value": "start_charging",
+              "label": {
+                "en": "Start charging",
+                "fr": "Démarrer la charge",
+                "de": "Laden starten",
+                "es": "Iniciar la carga"
+              }
+            },
+            {
+              "value": "stop_charging",
+              "label": {
+                "en": "Stop charging",
+                "fr": "Arrêter la charge",
+                "de": "Laden stoppen",
+                "es": "Detener la carga"
+              }
+            },
+            {
+              "value": "target_soc",
+              "label": {
+                "en": "Target charge level",
+                "fr": "Objectif de charge",
+                "de": "Ladeziel",
+                "es": "Objetivo de carga"
+              }
+            },
+            {
+              "value": "start_climate",
+              "label": {
+                "en": "Start climate",
+                "fr": "Démarrer la climatisation",
+                "de": "Klimatisierung starten",
+                "es": "Iniciar la climatización"
+              }
+            },
+            {
+              "value": "stop_climate",
+              "label": {
+                "en": "Stop climate",
+                "fr": "Arrêter la climatisation",
+                "de": "Klimatisierung stoppen",
+                "es": "Detener la climatización"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Car name",
+            "fr": "Nom de la voiture",
+            "de": "Fahrzeugname",
+            "es": "Nombre del coche"
+          }
+        },
+        {
+          "key": "command",
+          "type": "string",
+          "label": {
+            "en": "Command",
+            "fr": "Commande",
+            "de": "Befehl",
+            "es": "Orden"
+          }
+        },
+        {
+          "key": "reason",
+          "type": "string",
+          "label": {
+            "en": "Reason (code)",
+            "fr": "Raison (code)",
+            "de": "Grund (Code)",
+            "es": "Motivo (código)"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Meldung",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "start_climatisation",
+      "label": {
+        "en": "Start the climate of a car",
+        "fr": "Lancer la climatisation d'une voiture",
+        "de": "Klimatisierung eines Fahrzeugs starten",
+        "es": "Iniciar la climatización de un coche"
+      },
+      "description": {
+        "en": "Heat or cool the car before leaving. Without a temperature, the car uses its own settings.",
+        "fr": "Chauffe ou refroidit la voiture avant de partir. Sans température, la voiture garde ses réglages.",
+        "de": "Heizt oder kühlt das Fahrzeug vor der Abfahrt. Ohne Temperatur nutzt es seine eigenen Einstellungen.",
+        "es": "Calienta o enfría el coche antes de salir. Sin temperatura, el coche usa sus propios ajustes."
+      },
+      "timeout_seconds": 120,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": true
+        },
+        {
+          "key": "temperature",
+          "type": "number",
+          "label": {
+            "en": "Temperature (°C)",
+            "fr": "Température (°C)",
+            "de": "Temperatur (°C)",
+            "es": "Temperatura (°C)"
+          },
+          "required": false,
+          "min": 16,
+          "max": 30
+        }
+      ],
+      "outputs": [
+        {
+          "key": "started",
+          "type": "boolean",
+          "label": {
+            "en": "Start accepted",
+            "fr": "Démarrage accepté",
+            "de": "Start angenommen",
+            "es": "Inicio aceptado"
+          }
+        },
+        {
+          "key": "confirmed",
+          "type": "boolean",
+          "label": {
+            "en": "Confirmed by the car",
+            "fr": "Confirmé par la voiture",
+            "de": "Vom Fahrzeug bestätigt",
+            "es": "Confirmado por el coche"
+          }
+        }
+      ]
+    },
+    {
+      "key": "stop_climatisation",
+      "label": {
+        "en": "Stop the climate of a car",
+        "fr": "Arrêter la climatisation d'une voiture",
+        "de": "Klimatisierung eines Fahrzeugs stoppen",
+        "es": "Detener la climatización de un coche"
+      },
+      "description": {
+        "en": "Stop heating or cooling the car.",
+        "fr": "Arrête de chauffer ou de refroidir la voiture.",
+        "de": "Beendet das Heizen oder Kühlen des Fahrzeugs.",
+        "es": "Deja de calentar o enfriar el coche."
+      },
+      "timeout_seconds": 120,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "key": "stopped",
+          "type": "boolean",
+          "label": {
+            "en": "Stop accepted",
+            "fr": "Arrêt accepté",
+            "de": "Stopp angenommen",
+            "es": "Parada aceptada"
+          }
+        },
+        {
+          "key": "confirmed",
+          "type": "boolean",
+          "label": {
+            "en": "Confirmed by the car",
+            "fr": "Confirmé par la voiture",
+            "de": "Vom Fahrzeug bestätigt",
+            "es": "Confirmado por el coche"
+          }
+        }
+      ]
+    },
+    {
+      "key": "refresh_vehicle",
+      "label": {
+        "en": "Read a car now",
+        "fr": "Relire une voiture",
+        "de": "Fahrzeug jetzt lesen",
+        "es": "Leer un coche ahora"
+      },
+      "description": {
+        "en": "Read the car now and give its values to the next actions.",
+        "fr": "Relit la voiture maintenant et donne ses valeurs aux actions suivantes.",
+        "de": "Liest das Fahrzeug jetzt und gibt seine Werte an die nächsten Aktionen.",
+        "es": "Lee el coche ahora y pasa sus valores a las acciones siguientes."
+      },
+      "timeout_seconds": 120,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": true
+        },
+        {
+          "key": "wake",
+          "type": "boolean",
+          "label": {
+            "en": "Wake the car up",
+            "fr": "Réveiller la voiture",
+            "de": "Fahrzeug aufwecken",
+            "es": "Despertar el coche"
+          },
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Akkustand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "range",
+          "type": "number",
+          "label": {
+            "en": "Range (km)",
+            "fr": "Autonomie (km)",
+            "de": "Reichweite (km)",
+            "es": "Autonomía (km)"
+          }
+        },
+        {
+          "key": "fuel_level",
+          "type": "number",
+          "label": {
+            "en": "Fuel level (%)",
+            "fr": "Niveau de carburant (%)",
+            "de": "Tankfüllstand (%)",
+            "es": "Nivel de combustible (%)"
+          }
+        },
+        {
+          "key": "mileage",
+          "type": "number",
+          "label": {
+            "en": "Mileage (km)",
+            "fr": "Kilométrage (km)",
+            "de": "Kilometerstand (km)",
+            "es": "Kilometraje (km)"
+          }
+        },
+        {
+          "key": "locked",
+          "type": "boolean",
+          "label": {
+            "en": "Locked",
+            "fr": "Verrouillée",
+            "de": "Verriegelt",
+            "es": "Cerrado"
+          }
+        },
+        {
+          "key": "charging",
+          "type": "boolean",
+          "label": {
+            "en": "Charging",
+            "fr": "En charge",
+            "de": "Lädt",
+            "es": "Cargando"
+          }
+        },
+        {
+          "key": "plugged",
+          "type": "boolean",
+          "label": {
+            "en": "Plugged in",
+            "fr": "Branchée",
+            "de": "Angesteckt",
+            "es": "Enchufado"
+          }
+        },
+        {
+          "key": "climate_on",
+          "type": "boolean",
+          "label": {
+            "en": "Climate on",
+            "fr": "Climatisation en marche",
+            "de": "Klimatisierung an",
+            "es": "Climatización encendida"
+          }
+        }
+      ]
+    }
+  ]
+}

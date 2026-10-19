@@ -1,0 +1,115 @@
+{
+  "access": {
+    "accessStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "doorLockStatus": "unlocked",
+        "overallStatus": "unsafe",
+        "doors": [
+          {
+            "name": "bonnet",
+            "status": ["closed"]
+          },
+          {
+            "name": "frontLeft",
+            "status": ["unlocked", "open"]
+          },
+          {
+            "name": "frontRight",
+            "status": ["unlocked", "closed"]
+          },
+          {
+            "name": "trunk",
+            "status": ["unlocked", "closed"]
+          }
+        ],
+        "windows": [
+          {
+            "name": "frontLeft",
+            "status": ["closed"]
+          },
+          {
+            "name": "frontRight",
+            "status": ["closed"]
+          },
+          {
+            "name": "sunRoof",
+            "status": ["unsupported"]
+          }
+        ]
+      }
+    }
+  },
+  "fuelStatus": {
+    "rangeStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "carType": "gasoline",
+        "primaryEngine": {
+          "type": "gasoline",
+          "currentFuelLevel_pct": 55,
+          "remainingRange_km": 610
+        },
+        "totalRange_km": 610
+      }
+    }
+  },
+  "measurements": {
+    "fuelLevelStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "carType": "gasoline",
+        "currentFuelLevel_pct": 55,
+        "primaryEngineType": "gasoline"
+      }
+    },
+    "odometerStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "odometer": 81234
+      }
+    },
+    "rangeStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "gasolineRange": 610,
+        "totalRange_km": 610
+      }
+    }
+  },
+  "vehicleHealthInspection": {
+    "maintenanceStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-10-18T17:42:05Z",
+        "inspectionDue_days": -12,
+        "inspectionDue_km": -450,
+        "oilServiceDue_days": 200,
+        "oilServiceDue_km": 9000,
+        "mileage_km": 81234
+      }
+    }
+  },
+  "charging": {
+    "batteryStatus": {
+      "error": {
+        "message": "Upstream service responded with an unexpected status",
+        "errorTimeStamp": "2026-10-18T17:42:05Z",
+        "info": "",
+        "code": 4111,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "climatisation": {
+    "climatisationStatus": {
+      "error": {
+        "message": "Upstream service responded with an unexpected status",
+        "errorTimeStamp": "2026-10-18T17:42:05Z",
+        "code": 4111,
+        "group": 2,
+        "retry": true
+      }
+    }
+  }
+}

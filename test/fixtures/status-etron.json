@@ -1,0 +1,186 @@
+{
+  "access": {
+    "accessStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "doorLockStatus": "locked",
+        "doors": [
+          {
+            "name": "bonnet",
+            "status": ["closed"]
+          },
+          {
+            "name": "frontLeft",
+            "status": ["locked", "closed"]
+          },
+          {
+            "name": "frontRight",
+            "status": ["locked", "closed"]
+          },
+          {
+            "name": "rearLeft",
+            "status": ["locked", "closed"]
+          },
+          {
+            "name": "rearRight",
+            "status": ["locked", "closed"]
+          },
+          {
+            "name": "trunk",
+            "status": ["locked", "closed"]
+          }
+        ],
+        "overallStatus": "safe",
+        "windows": [
+          {
+            "name": "frontLeft",
+            "status": ["closed"]
+          },
+          {
+            "name": "frontRight",
+            "status": ["closed"]
+          },
+          {
+            "name": "rearLeft",
+            "status": ["closed"]
+          },
+          {
+            "name": "rearRight",
+            "status": ["closed"]
+          },
+          {
+            "name": "roofCover",
+            "status": ["unsupported"]
+          },
+          {
+            "name": "sunRoof",
+            "status": ["unsupported"]
+          },
+          {
+            "name": "sunRoofRear",
+            "status": ["unsupported"]
+          }
+        ]
+      }
+    }
+  },
+  "charging": {
+    "batteryStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "cruisingRangeElectric_km": 300,
+        "currentSOC_pct": 69
+      }
+    },
+    "chargingSettings": {
+      "value": {
+        "autoUnlockPlugWhenChargedDC": "off",
+        "carCapturedTimestamp": "2026-08-18T21:01:03Z",
+        "targetSOC_pct": 70
+      }
+    },
+    "chargingStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "chargeMode": "manual",
+        "chargePower_kW": 0,
+        "chargeRate_kmph": 0,
+        "chargeType": "off",
+        "chargingState": "readyForCharging",
+        "remainingChargingTimeToComplete_min": 0
+      }
+    },
+    "plugStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "externalPower": "ready",
+        "ledColor": "green",
+        "plugConnectionState": "connected",
+        "plugLockState": "locked"
+      }
+    }
+  },
+  "climatisation": {
+    "climatisationSettings": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:02Z",
+        "climatisationWithoutExternalPower": true,
+        "climatizationAtUnlock": false,
+        "targetTemperature_C": 15.5,
+        "targetTemperature_F": 59,
+        "windowHeatingEnabled": false,
+        "zoneFrontLeftEnabled": false,
+        "zoneFrontRightEnabled": false
+      }
+    },
+    "climatisationStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "climatisationState": "off",
+        "remainingClimatisationTime_min": -256
+      }
+    },
+    "windowHeatingStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:31:52Z",
+        "windowHeatingStatus": [
+          {
+            "windowHeatingState": "invalid",
+            "windowLocation": "front"
+          },
+          {
+            "windowHeatingState": "invalid",
+            "windowLocation": "rear"
+          }
+        ]
+      }
+    }
+  },
+  "fuelStatus": {
+    "rangeStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "carType": "electric",
+        "primaryEngine": {
+          "currentSOC_pct": 69,
+          "remainingRange_km": 300,
+          "type": "electric"
+        },
+        "totalRange_km": 300
+      }
+    }
+  },
+  "measurements": {
+    "fuelLevelStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "carType": "electric",
+        "currentSOC_pct": 69,
+        "primaryEngineType": "electric"
+      }
+    },
+    "odometerStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "odometer": 43740
+      }
+    },
+    "rangeStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:17Z",
+        "electricRange": 300,
+        "totalRange_km": 300
+      }
+    }
+  },
+  "vehicleHealthInspection": {
+    "maintenanceStatus": {
+      "value": {
+        "carCapturedTimestamp": "2026-08-18T21:09:15Z",
+        "inspectionDue_days": 381,
+        "inspectionDue_km": 16898,
+        "mileage_km": 43740
+      }
+    }
+  }
+}
