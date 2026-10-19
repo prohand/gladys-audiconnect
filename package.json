@@ -1,6 +1,6 @@
 {
   "name": "gladys-audiconnect",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Gladys Assistant external integration for Audi connect (myAudi) vehicles: status, charging, climate and locks.",
   "type": "module",
