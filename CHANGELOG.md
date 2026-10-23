@@ -10,6 +10,10 @@ Release.
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-10-23
+
+- Maintenance release, no functional change.
+
 ## [0.0.2] - 2026-10-19
 
 - Maintenance release, no functional change.
@@ -36,6 +40,7 @@ Release.
   requests), Release, image build and GitHub release workflows, Dependabot.
 - `SECURITY.md`, `CHANGELOG.md` and `CLAUDE.md`.
 
-[Unreleased]: https://github.com/prohand/gladys-audiconnect/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/prohand/gladys-audiconnect/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/prohand/gladys-audiconnect/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/prohand/gladys-audiconnect/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/prohand/gladys-audiconnect/releases/tag/v0.0.1

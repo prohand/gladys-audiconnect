@@ -8,8 +8,8 @@
     "de": "Akku, Laden, Klimatisierung, Verriegelung und Position deiner Audi, über myAudi.",
     "es": "Batería, carga, climatización, cierres y posición de sus Audi, desde myAudi."
   },
-  "version": "0.0.2",
-  "docker_image": "ghcr.io/prohand/gladys-audiconnect:0.0.2",
+  "version": "0.0.3",
+  "docker_image": "ghcr.io/prohand/gladys-audiconnect:0.0.3",
   "gladys_version": ">=5.1.0",
   "cover_image": "https://raw.githubusercontent.com/prohand/gladys-audiconnect/main/cover.png",
   "categories": ["energy", "climate", "security"],
