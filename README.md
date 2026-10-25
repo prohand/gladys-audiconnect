@@ -10,7 +10,7 @@ Built from the official
 with the [`@gladysassistant/integration-sdk`](https://github.com/GladysAssistant/integration-sdk-js).
 
 - **Type**: `device`, cloud only (`"transports": ["cloud"]`)
-- **Gladys**: 5.1.0 or later
+- **Gladys**: 5.3.0 or later
 - **Markets**: Europe and Canada (myAudi accounts from the US and China are not supported)
 - **Languages**: English, French, German, Spanish
 

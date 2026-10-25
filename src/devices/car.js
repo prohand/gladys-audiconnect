@@ -253,6 +253,8 @@ export function buildCarDevice(gladys, vehicle, state) {
     external_id: ids.device,
     // Gladys calls onPoll every minute; src/devices/index.js reads the car at
     // the slower interval of the configuration by skipping the polls between.
+    // Gladys 5.3 sets `should_poll` itself from `poll_frequency`; a core before
+    // 5.3 never polled without it, so the flag stays explicit.
     should_poll: true,
     poll_frequency: DEVICE_POLL_FREQUENCIES.EVERY_MINUTES,
     features: featuresOf(state).map((feature) => ({

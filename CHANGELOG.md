@@ -10,6 +10,20 @@ Release.
 
 ## [Unreleased]
 
+### Added
+
+- The integration sits on the new **Vehicles** shelf of the Gladys catalog (with Energy and
+  Security; Climate makes room), and declares search keywords (e-tron models, electric car,
+  plug-in hybrid, EV charging…).
+
+### Changed
+
+- **Gladys 5.3.0 or later is now required** (the catalog keywords are a Gladys 5.3 manifest
+  field).
+- Gladys integration SDK 0.16.
+- The pull-request CI runs the store checks without the image check, and the Release workflow
+  runs the full store check once the image is published.
+
 ## [0.0.3] - 2026-10-23
 
 - Maintenance release, no functional change.

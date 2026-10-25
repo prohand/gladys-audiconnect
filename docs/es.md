@@ -8,6 +8,7 @@ La integración lee la nube de Audi (myAudi): los mismos datos que la app myAudi
 
 ## Antes de empezar
 
+- **Gladys 5.3 o posterior**.
 - Una **cuenta myAudi** con su coche añadido y los servicios Audi connect activos (como en la app
   myAudi).
 - Una cuenta creada en **Europa** o en **Canadá**. Las cuentas de Estados Unidos y China no son

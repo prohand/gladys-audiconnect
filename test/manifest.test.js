@@ -71,9 +71,61 @@ test('scene triggers, scene actions and widgets require Gladys >= 5.1.0', () => 
   assert.ok(isAtLeast(manifest.gladys_version, [5, 1, 0]), manifest.gladys_version);
 });
 
-test('categories: 1 to 3, which requires Gladys >= 4.86.0', () => {
-  assert.ok(manifest.categories.length >= 1 && manifest.categories.length <= 3);
+// The shelves of the catalog: the store keeps the keys of this vocabulary and
+// drops any other one with a mere warning, so a typo silently costs a shelf.
+// `transport`, `vehicles`, `servers` and `leisure` joined it in 2026-10.
+const CATALOG_CATEGORIES = [
+  'climate',
+  'lighting',
+  'energy',
+  'security',
+  'multimedia',
+  'appliances',
+  'environment',
+  'protocols',
+  'network',
+  'notifications',
+  'assistants',
+  'services',
+  'transport',
+  'vehicles',
+  'servers',
+  'leisure',
+];
+
+test('categories: 1 to 3 known shelves, which requires Gladys >= 4.86.0', () => {
+  const { categories } = manifest;
+  assert.ok(categories.length >= 1 && categories.length <= 3);
+  assert.equal(new Set(categories).size, categories.length, 'a shelf is listed twice');
+  for (const category of categories) {
+    assert.ok(CATALOG_CATEGORIES.includes(category), `unknown shelf "${category}"`);
+  }
+  assert.ok(categories.includes('vehicles'), 'a car integration sits on the vehicles shelf');
   assert.ok(isAtLeast(manifest.gladys_version, [4, 86, 0]));
+});
+
+test('keywords: 1 to 10 unique search terms of 2 to 30 characters', () => {
+  const { keywords } = manifest;
+  assert.ok(Array.isArray(keywords) && keywords.length >= 1 && keywords.length <= 10);
+  const normalized = keywords.map((keyword) => keyword.trim().toLowerCase());
+  assert.equal(new Set(normalized).size, keywords.length, 'the store compares them lowercased');
+  for (const keyword of normalized) {
+    assert.ok(keyword.length >= 2 && keyword.length <= 30, `"${keyword}" is out of bounds`);
+  }
+});
+
+test('no countries are declared', () => {
+  // myAudi accounts of Europe and Canada are supported: more countries than
+  // the 20 the field holds, and declaring a subset would hide the integration
+  // from the catalog of the others. The docs name the markets instead.
+  assert.equal(manifest.countries, undefined);
+});
+
+test('keywords, countries and music require Gladys >= 5.3.0', () => {
+  // An older core rejects the whole manifest over a field it does not know.
+  if (['keywords', 'countries', 'music'].some((field) => field in manifest)) {
+    assert.ok(isAtLeast(manifest.gladys_version, [5, 3, 0]), manifest.gladys_version);
+  }
 });
 
 test('the integration is cloud only: the transports field says so', () => {
