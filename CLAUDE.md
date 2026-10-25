@@ -13,7 +13,9 @@ conventions of prohand/gladys-devmel (workflows, four languages).
 Cloud only (`"transports": ["cloud"]`): every value comes from the Audi / VW Group cloud, nothing
 talks to the car on the LAN. One Gladys device per car (VIN). Gladys 5.1+ adds scene triggers
 (charging state changed, lock state changed, command failed), scene actions (start/stop
-climate, read a car) and the "Audi car" widget.
+climate, read a car) and the "Audi car" widget. The manifest requires Gladys 5.3.0 (catalog
+`keywords`); shelves `vehicles`, `energy`, `security`; no `countries` (Europe and Canada are
+more than the field holds).
 
 ## Commands
 
@@ -97,7 +99,8 @@ test/helpers/fakeAudi.js     fake Audi cloud plugged in place of fetch
   (`### Added`, `Changed`, `Fixed`, `Removed`, `Security`). Never write a version heading.
 - **Manifest.** Texts are `{ en, fr, de, es }` objects (label, description, placeholder);
   `test/manifest.test.js` enforces the four languages and ties the manifest to the code
-  (defaults, actions, scene actions, triggers, widgets).
+  (defaults, actions, scene actions, triggers, widgets, catalog categories and keywords, the
+  `gladys_version` floor).
 - **User-facing text** is in the four languages: `src/messages.js`, widget texts, manifest and
   `docs/*.md`, kept in sync.
 - **The container rootfs is read-only.** Nothing is written to disk; tokens stay in memory and

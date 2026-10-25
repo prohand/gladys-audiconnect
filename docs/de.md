@@ -9,6 +9,7 @@ Die Integration liest die Audi-Cloud (myAudi): dieselben Daten wie die myAudi-Ap
 
 ## Bevor du beginnst
 
+- **Gladys 5.3 oder neuer**.
 - Ein **myAudi-Konto** mit deinem Fahrzeug und aktiven Audi connect Diensten (wie in der
   myAudi-App).
 - Ein in **Europa** oder **Kanada** erstelltes Konto. Konten aus den USA und China werden nicht
